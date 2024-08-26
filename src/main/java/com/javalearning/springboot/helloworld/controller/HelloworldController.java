@@ -25,8 +25,11 @@ public class HelloworldController {
 	Student student;
 	
 	@Autowired
-	@Qualifier("ragiPorridge")
+	//@Qualifier("ragiPorridge")
 	RagiFlour flour;
+	
+	@Autowired
+	RagiFlour ragiPorridge;
 	
 	
 	@GetMapping("/hello")
@@ -39,10 +42,11 @@ public class HelloworldController {
 		logger.warn("WARN");
 		logger.error("ERROR");
 		
-		System.out.println(beatiful.getBeautiful());
-		student.print();
+		//System.out.println(beatiful.getBeautiful());
+		//student.print();
 		
-		System.out.println(flour.RagiRecipe());
+		System.out.println(flour.getRagiRecipe());
+		System.out.println(ragiPorridge.getRagiRecipe());
 		
 		return "Welcome to Springboot Learning!"+msg;
 	}

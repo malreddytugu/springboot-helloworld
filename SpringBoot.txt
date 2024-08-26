@@ -1,0 +1,397 @@
+SpringBoot Tutorial for Beginners
+----------------------------------
+1.How to create SpringBoot Application
+
+Spring and SpringBoot?
+
+Spring Initializr
+
+provide all the basic details artifact id, group id and dependencies
+download the zip file of the application and start working.
+
+
+Maven--Build Tool
+JAR : Java Archieve
+WAR : Web Archieve
+EAR : Enterprise Archieve
+
+Deploy springboot application in tomcat webserver
+
+WebServer			Application Server
+tomcat 				weblogic, jboss, websphere
+
+war file            ear file
+
+jar war ear
+
+web container       web and ejb container
+supports multithreading  no suppport for multi threading
+http/https               http/https/rpc/RMI
+
+inbuilt tomcat---> jar file
+tomcat is a web server
+
+https://netbanking.hdfcbank.com/netbanking/
+https--secure hypertext transfer protocol
+encoding
+encryption
+
+abc-->xyz
+abc-->h13-->encrption SHA256
+
+
+ipaddress:port//context/hello
+
+127.0.0.0:8181/hello
+
+80-->http
+443-->https
+
+demo.war
+demo
+	MEATA-INF
+	WEB-INF
+		classes
+			com
+				javalearning
+					springboot
+						helloworld
+							controller
+								HelloWorldController.java
+			application.properties
+		lib
+		
+ 
+
+500 -- Internal server error
+402--Bad Request
+404--Resource not found
+how to run a jar file
+java -jar jarFile_name.jar
+
+How to do logging in sprinboot
+
+TRACE
+DEBUG
+INFO
+WARN
+ERROR
+
+controller
+service
+Repository
+
+JMS-->RabbiMQ, ActiveMQ, Kafka
+Spring Security
+MSA
+
+Apache Solr--Search Engine
+Apache LicidWorks
+Python
+Apache AirFlow
+Fusion
+
+15 services
+kubernetes
+docker
+jenkins
+git hub actions
+
+code walk through--
+
+OrderService---5----10
+DeliveryService--5--10
+ProductService--5---10
+
+CICD--Jenkins/GHA
+scaleup and scaledown
+
+demo.jar-->deployed to some server--->
+
+httP://localhost:8080/demo/hello
+
+
+windows: cmd--ipconfig-->ipv4 is your local ip addres
+API Gateway
+
+
+Environments
+--------------
+dev deployemnt   - developers
+QA Deployemnet   - qa or testing  -->release version-->sign off 
+pre-prod/stage deployment -
+prod deployment -
+
+dev-->integration/v1
+qa--->release/v1
+prod -->master
+
+integration/v1--->task/TFSRPL-1172-AirFlow Service for QA(feature branch) 
+PR-->Pull Request
+MR-->Merge Request
+
+E?-Release
+
+once you raise the PR to dev branch, people should review the code,
+if any suggetions, need to modify and merge the PR.
+
+Jenkins
+Docker
+Kubernetes
+GitHub Actions
+--------------
+
+
+
+
+CICD--> Continuos Integration and Continuos deploment
+automate the process of building and deployment is called CICD.
+integration/v1---> automatically build and deploy to server
+
+asks for permission to merge the code to release branch
+it raise PR from integration/v1 ---> release/v1 
+
+release/v1 <---integration/v1, people has to approve
+master<---release/v1(RFC-->CHNO1248)
+SOP--> Standards of Procedure
+Repo: springboot-helloword
+
+Product Owner will an email with Releasenotes
+---------------------------------------------
+Deployments in kubernetes
+--------------------------
+blue/green deployment
+canary deployment
+recreate deploment
+rolling deployment
+
+1.How to create a SpringBoot Application
+Using Spring Initializr
+
+
+@SpringBootApplication = @SpringBootConfiguration
+						 @EnableAutoConfiguration
+						 @ComponentScan
+EnableAutoConfiguration: it automatically defines the configurations for the starter dependencies added in pom.xml
+eg: spring security, data-jpa etc
+
+ComponentScan: scans the base packages or classes for the beans.
+Configuration: java configurations for the beans for ioc to load.
+
+Stereotype annotations used to create a bean and manage its life cycle.
+
+different types stereotype to define the role. 
+
+
+How to make any Java class as a bean?
+
+@Component
+public class ComponentDemo{
+	public ComponentDemo() {
+		System.out.println("ComponentDemo instantiated");
+	}
+	
+	public String getMessage() {
+		return "Hello Message";
+	}
+}
+
+
+Now you can autowire the above class.
+
+
+
+@RestController
+public class HelloworldController {	
+	Logger logger = LoggerFactory.getLogger(HelloworldController.class);
+	
+	@Autowired
+	ComponentDemo componentDemo;
+}	
+
+POJO or Java Bean
+public class Employee{
+	private int id;
+	private String name;
+	
+	//getters and setters
+}
+
+
+IOC---Inversion of Control
+DI--Dependency Injection
+
+
+Spring Boot Main annotations
+--------------------------------------------------
+1. @SpringBootApplication
+2. @ComponentScan
+3. @EanbleAutoConfiguration
+4. @Configuration
+
+Stereotype annotation
+----------------------------------------
+5.  @Component // to make your java class as a bean.
+6.  @Service
+7.  @RestController / @Controller, @ResponseBody
+8.  @Repository, 
+
+Spring Core related Annotations:
+----------------------------------------------------
+9.@Configuration // to make java configurations
+10.@Bean
+11.@Autowired 
+12.@Qualifier,@Primary
+13.@Lazy 
+14.@Value 
+15.@PropertySource
+16.@ConfigurationProperties 
+17.@Profile
+18.@Scope
+
+REST API related Annotations:
+------------------------------------------------
+19.@RestController
+20.@RequestMapping
+21.@GetMapping
+22.@PostMapping
+23.@PutMapping
+24.@DeleteMapping
+25.@RequestBody 
+26.@PathVariable
+27.@RequestParam
+28.@ControllerAdvice & @ExceptionHandler
+
+Spring Data JPA related annotations:
+------------------------------------------------------------
+29.@Entity
+30.@Table
+31.@Column
+32.@Transactional 
+33.Entity class relationships 
+34.@OnetoOne 
+35.@OnetoMany 
+36.@ManytoOne
+37.@ManytoMany
+
+Bean:
+
+	java class, and method are there in that java class
+AppConfig
+
+	
+	@Autowired
+	Address addressBean;
+
+RabbitMQ
+Kafka
+Springboot Annotations
+Maven
+Profiles
+Exception Handling in SpringBoot
+Docker
+Kubernetes
+Spring Security
+
+@Autowired 
+	The @Autowired annotation is used to inject the bean automatically.
+	The @Autowired annotation is used in Constructor injection, Setter injection, and Field injection.
+
+eg: public interface Momo{
+		public String getMomo();
+	}
+@Component	
+public class VegMomo implements Momo{
+
+	@override
+	public String getMomo(){
+		return "Veg Momo";
+	}
+}
+
+@Component
+public class VegMomo implements Momo{
+
+	@override
+	public String getMomo(){
+		return "Veg Momo";
+	}
+}
+
+and in your MomoController, 
+
+	@Autowired
+    @Qualifier("vegMomo")
+    public void setMomo(Momo momo) {
+        this.momo = momo;
+    }
+
+//filed injection
+@Autowired
+@Qualifier("vegPizza")
+private Pizza pizza;
+
+@Component is a class-level annotation. During the component scan, Spring Framework automatically detects classes annotated with @Component annotation and creates Spring beans for those classes.
+
+@Configuration
+@ComponentScan(basePackages = "com.javalearning.springboot.helloworld")
+class UserConfig {}
+
+@Qualifier
+	Note that we are using @Qualifier annotation in conjunction with @Autowired to avoid confusion when we have two or more beans configured for the same type.
+
+The @Bean annotation indicates that a method produces a bean to be managed by the Spring container. 
+
+The @Bean annotation is usually declared in the Configuration class to create Spring Bean definitions.
+
+
+@RestController = @ResponseBody+@Controller
+@Controller=@Service=@Repository=@Component
+
+@Service = @Component
+
+Java class-->@Component
+         -->@Configuration and the define teh beans.
+		 @Bean
+		 the method returns the obeject
+		 
+		 RestTemplate restTemplate; //httpClient;
+		 restTemplate.get("http://localhost:8080/hello");
+		 
+		 
+Interface: pure abstract methods
+
+pure abstract method--> with out implenting body
+
+public void show();--> abstract method
+
+public class Employee{
+
+	priavte int id;
+	private String name;
+	
+	public void show(){
+		s.o.p("Im Employee")
+	}
+}
+
+public interface EmpInteface{
+		public void show();
+}
+
+public class EmpIntefaceImpl implements EmpInteface{
+	@Override
+	public void show(){
+		sop("bla bla");
+	}
+}
+
+abstraction
+abstract class
+abstract method
+26-08-2024
+@Primary:
+	We use @Primary annotation to give a higher preference for a bean when there are multiple beans of the same type.
+
+@Lazy
+	By deafult spring beans are eagerly loaded.
