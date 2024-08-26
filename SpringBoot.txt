@@ -395,3 +395,60 @@ abstract method
 
 @Lazy
 	By deafult spring beans are eagerly loaded.
+
+@SpringBootApplication==@EnableAutoConfiguration,@ComponentScan,@SpringBootConfiguration
+@Autowired
+@Bean
+@Qualifier--->interface-->multiple classes implements interface.
+@Component
+@Service
+@Repository
+@Controller
+@RestController
+
+
+@Primary
+@Lazy
+
+//Qualifier("ragiPorridge")
+@Autowired
+private RagiFlour ragiPorridge;
+
+@Component
+@Primary
+public class RagiPorridge implements RagiFlour{
+
+	public getRagiRecipe(){
+		s.o.p("RagiPorridge");
+	}
+}
+
+@Component
+@Lazy
+public class Student{
+	display(){
+		s.o.p("Im a Java Student")
+	}
+}
+
+
+@Lazy 
+@Value 
+@PropertySource
+
+Map-->Interface-->DataStructure
+
+
+Person==>
+
+name=Malreddy
+age=39
+mobile=7026376044
+email=malreddy.tugu@gmail.com
+
+HashMap<String,String> personMap = new HashMap<String,String>();
+personMap.put("name":Malreddy");
+personMap.put("mobile":"7026376044");
+
+personMap.get("name");==>Malreddy
+
