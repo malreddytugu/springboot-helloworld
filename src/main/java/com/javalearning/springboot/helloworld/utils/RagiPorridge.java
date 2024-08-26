@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class RagiPorridge implements RagiFlour {
 
 	@Override
-	public String RagiRecipe() {
+	public String getRagiRecipe() {
 		return "Ragi Porridge with Jaggaery with cashew and dry grapes with Desi cow Ghee";
 	}
 
