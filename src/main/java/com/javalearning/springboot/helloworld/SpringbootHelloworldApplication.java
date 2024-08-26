@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.javalearning.springboot.helloworld.utils.Student;
-
 @SpringBootApplication
 public class SpringbootHelloworldApplication extends SpringBootServletInitializer {
 
@@ -22,7 +20,7 @@ public class SpringbootHelloworldApplication extends SpringBootServletInitialize
 		 //}
 		 
 		 for(String beanName  : beanNames) {
-			 System.out.println(beanName);
+			// System.out.println(beanName);
 		 }
 	}
 

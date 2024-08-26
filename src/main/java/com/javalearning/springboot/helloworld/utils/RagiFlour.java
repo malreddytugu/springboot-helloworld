@@ -2,6 +2,6 @@ package com.javalearning.springboot.helloworld.utils;
 
 public interface RagiFlour {
 	
-	public String RagiRecipe();
+	public String getRagiRecipe();
 
 }
