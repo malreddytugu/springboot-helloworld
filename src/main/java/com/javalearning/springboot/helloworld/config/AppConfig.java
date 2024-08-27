@@ -2,6 +2,7 @@ package com.javalearning.springboot.helloworld.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.javalearning.springboot.helloworld.utils.Address;
 import com.javalearning.springboot.helloworld.utils.Student;
@@ -18,5 +19,11 @@ public class AppConfig {
 	initMethod = "init", destroyMethod = "destroy")
 	public Student student() {
 		return new Student(address());
+	}
+	
+	@Bean
+	@Profile(value = {"dev","!dev"})
+	public DbConfig dbConfig() {
+		return new DbConfig();
 	}
 }

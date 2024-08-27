@@ -452,3 +452,246 @@ personMap.put("mobile":"7026376044");
 
 personMap.get("name");==>Malreddy
 
+27-08-2024
+------------------
+
+
+	@Value("${message}")
+	private String message;
+	
+	@Value("#{${valuesMap}}")
+	private Map<String, Integer> valuesMap;
+	
+	@Value("#{${valuesMap}.key1}")
+	private Integer valuesMapKey1;
+	
+	@Autowired
+	private DatasourceProps datasourceProps;
+	
+	@Autowired
+	private DbConfig dbConfig;
+	
+	@Autowired
+	private ProfileController profileController;
+	
+	@Value("${spring.profiles.active}")
+	List<String> activeProfiles;
+	
+@Value("${emails}")
+String[] emails;
+
+emails.length = 3  0,1,2
+
+for(int i=0;i<emails.length;i++){
+
+}
+
+emails[0] = abc@gmail.com
+emails[1] = def@gmail.com
+emails[2] = ghi@gmail.com
+
+ or
+@Value("${emails}")
+List<String> emails;
+
+@PropertySource("classpath:custom.properties")
+@Value("${message}")
+
+@Value("#{${valuesMap}}")
+private Map<String, Integer> valuesMap
+
+and in properties file	
+	valuesMap={key1: '1', key2: '2', key3: '3'}
+
+@ConfigurationProperties
+
+
+Local, Dev, QA,PRE-PROD or Stage, PROD
+Profile
+
+db.url=dev db url
+db.username=dev db user name
+db.password=dev db password
+
+application.properties
+eg : application-env.properties
+
+application-dev.properties
+application-qa.properties
+application-stg.properties
+application-prod.properties
+
+java -jar jarfilename.jar
+java -jar demo.jar -p=dev
+
+YAML---Yet Another Markup Language
+
+XML, HTML
+<persons>
+	<person>
+		<name>Malreddy</name>
+		<age>39</age>
+	</person>
+	<Person>
+		<name>Malreddy</name>
+		<age>39</age>
+	</person>
+</persons>
+
+
+application.yml
+
+spring.profiles.active=dev
+spring.profiles.xyz=abc
+	
+spring
+	profiles
+		active:dev
+		xyz:abc
+
+Approach#1: By Creating Separate files for each Profile
+Let’s create application.yml and three profiles for development, test & production environment respectively.
+
+application.yml
+
+spring:  
+  profiles:    
+    active: dev
+  application:
+  name: This is default profile
+app: 
+  name: This is the Primary Application yml file
+application-dev.yml
+
+spring: 
+  profiles: dev 
+  datasource: 
+    username: sa 
+    password: sa 
+    url: jdbc:h2:mem:db 
+    driver-class-name: org.h2.Driver
+application-test.yml 
+
+spring: 
+  profiles: test 
+  datasource: 
+    username: root
+    password: root123
+    url: jdbc:mysql://localhost:3306/myTestDB 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+application-prod.yml
+
+spring: 
+profiles: prod
+  datasource: 
+    username: username1
+    password: password@123
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle10gDialect
+		
+	application.yaml
+------------------------	
+app.info= This is the multi-document file
+spring.config.activate.on-profile=dev
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:db
+spring.datasource.userName=sa
+spring.datasource.password=sa
+
+# ---
+
+spring.config.activate.on-profile=test
+spring.datasource.url=jdbc:mysql://localhost:3306/myTestDB
+spring.datasource.username=root
+spring.datasource.password=root123
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+
+# ---
+
+spring.config.activate.on-profile=prod 
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe 
+spring.datasource.username=username 
+spring.datasource.password=password 
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true 
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver 
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+H
+
+Approach#2: By Creating Single file for all Profiles
+Create an application.yml and accommodate all the profiles in it. The first property ‘spring.profiles.active’ represents the active profile. Three hyphens work as a profile separator in this file. Hence, after completion of one profile insert three hyphens as shown below.
+
+spring:
+  profiles:
+    active: dev
+---
+spring:
+ profiles: dev
+ datasource: 
+   username: sa
+   password: sa
+   url: jdbc:h2:mem:db
+   driver-class-name: org.h2.Driver
+---
+spring: 
+  profiles: test 
+  datasource: 
+    username: root
+    password: root123
+    url: jdbc:mysql://localhost:3306/myTestDB 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+---
+spring: 
+  profiles: prod
+  datasource: 
+    username: username1
+    password: password@123
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle10gDialect  
+---    
+As shown in the above example, from the first property, it is clear that ‘dev’ profile is active. Additionally, this single file accommodates all the profiles in it.
+
+
+
+1) Activation of a Specific Profile: Apart from property ‘spring.profiles.active‘, a new property ‘spring.config.activate.on-profile’ can be used to set/activate a specific profile. However, we can’t use them together otherwise we may see ConfigDataException.
+
+2) To activate Profiles In Spring Boot programmatically, we can also use the SpringApplication class(main class of the application) as below:
+
+SpringApplication.setAdditionalProfiles("test");
+
+
+3) In order to activate a profile in Spring Boot using pom.xml, we can specify profile names under ‘spring-boot-maven-plugin’ as below:
+
+
+<plugins> 
+  <plugin>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-maven-plugin</artifactId> 
+        <configuration> 
+           <profiles> 
+             <profile>test</profile>
+           </profiles>
+        </configuration> 
+  </plugin> 
+  ... 
+</plugins>
+
+@Scope
