@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javalearning.springboot.helloworld.config.DatasourceProps;
 import com.javalearning.springboot.helloworld.config.DbConfig;
+import com.javalearning.springboot.helloworld.model.Employee;
+import com.javalearning.springboot.helloworld.service.EmployeeService;
 import com.javalearning.springboot.helloworld.service.LazyLoadingBean;
 import com.javalearning.springboot.helloworld.utils.Beatiful;
 import com.javalearning.springboot.helloworld.utils.RagiFlour;
@@ -83,9 +85,12 @@ public class HelloworldController {
 	@Autowired
 	ProfileController profileController;
 	
+	@Autowired
+	EmployeeService employeeService;
+	
 	
 	@GetMapping("/hello")
-	public String hello(@RequestParam(required = false) String msg) {
+	public Employee hello(@RequestParam(required = false) String msg) {
 		//System.out.println("hello method is called...");
 		logger.debug("***************"+msg);
 		logger.trace("TRACE");
@@ -159,8 +164,8 @@ public class HelloworldController {
 		 * 
 		 * System.out.println("valuesMapKey1 : "+valuesMapKey1);
 		 */
-
+		System.out.println(employeeService.getAll());
 		
-		return "Welcome to Springboot Learning!"+msg;
+		return new Employee(101l, "Malreddy", "malreddy.tugu@gmail.com", "IT", "Bangalore");
 	}
 }
