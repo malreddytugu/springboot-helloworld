@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
+//@ComponentScan(basePackages = "{com.javalearning.springboot.helloworld.service}")
 public class SpringbootHelloworldApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
