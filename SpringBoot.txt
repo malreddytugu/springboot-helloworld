@@ -694,4 +694,157 @@ SpringApplication.setAdditionalProfiles("test");
   ... 
 </plugins>
 
-@Scope
+
+
+28-08-2024
+
+dev,qa,stg,prod
+
+@Scope--singleton, prototype, requesst, session
+	To test, create a constructor put one sop("Object is created") and observe the output.
+@Scope("singleton")
+public class HelloWorldController{
+
+
+	public HelloWorldController(){
+		System.out.println("HelloWorldController object created");
+	}
+......
+......
+......
+}
+
+scopes in spring--- singleton, prototype, request, session
+
+sigleton design pattern
+	Design Pattern: solution for commonly occuring problems.
+REST API related Annotations:
+------------------------------------------------
+19.@RestController
+20.@RequestMapping
+21.@GetMapping
+22.@PostMapping
+23.@PutMapping
+24.@DeleteMapping
+25.@RequestBody 
+26.@PathVariable
+27.@RequestParam
+28.@ControllerAdvice & @ExceptionHandler
+
+How can i confirm that the object created only once?
+create a constructor and put one sop inside and verify the output.
+default scope is singleton.
+
+1.Create an Employee and then getEmps static method to return List<Employee>
+
+2.created rest endpoint to get all the employees
+ 
+ 1.Issue was there were no getter and setter methods defined in Employee model.
+ 2. EmployeeService bean is not getting created, hence manually added the bean config to AppConfig.
+ 
+
+endpoint URL : http://localhost:8080/employee
+Method : GET
+Response:
+
+[
+  {
+    "empId": 101,
+    "name": "Malreddy",
+    "emailId": "malreddy.tugu@gmail.com",
+    "deptName": "IT",
+    "location": "Bangalore"
+  },
+  {
+    "empId": 102,
+    "name": "Vasu",
+    "emailId": "vasu@gmail.com",
+    "deptName": "ADMIN",
+    "location": "USA"
+  }
+]
+
+@RestController== @Controller+@ResponseBody
+@ResponseBody converts your java to JSON.
+
+[
+{
+	"name":"Malreddy",
+	"age":"39",
+	"email":"malreddy.tugu@gmail.com"
+},
+{
+	"name":"Keerthi",
+	"age":"26",
+	"email":"kkumar@gmail.com"
+}
+]
+Jettyson Jackson MessageConverters--Java--JSON
+Gson-->google
+
+MVC--> Model View Controller
+
+DAO--->Model
+View --->User Interface
+Controller-->Server-->Servlet  
+
+ModelAndView mv = new ModelAndView();
+mv.setModel(emplIst);
+mv.setView("emp.html");
+return mv;
+
+@RequestMapping("/employee",method=HTTPMethod.GET, produces="application/json")
+
+@GetMapping("/employee")
+
+http://localhost:8080/employee?id=1&name=Malreddy
+
+
+QueryParams or RequestParam
+id and name are query params or request params
+
+how can you pass a value to a get api?
+@RequestParam
+
+	@GetMapping("/hello")
+	public Employee hello(@RequestParam(required = true) String msg, @RequestParam(defaultValue = "0") int age) {
+....
+....
+}
+
+@GetMapping("/employee/{id}")
+public Employee getEmployeeById(@PathVariable long id){
+
+}
+
+While @RequestParams extract values from the query string, @PathVariables extract values from the URI path:
+
+
+//Example URL: http://localhost:8080/users/location/IN/region/DEL?status=active&minAge=18&maxAge=60
+
+@GetMapping("/users/country/{countryCode}/state/{stateCode}")
+public String getUsers(@PathVariable Map<String, String> locationMap, @RequestParam Map<String,String> queryMap) {
+
+....
+....
+
+}
+
+
+@GetMapping("/employee/{id}/name/{name}")
+	public String getEmployee( @PathVariable Map<String, String> empMap) {
+		System.out.println(empMap);
+		return "PathParamMap";
+	}
+	
+	@GetMapping("/employee/id/name/")
+	public String getEmployeeQueryMap(@RequestParam Map<String, String> queryMap) {
+		System.out.println(queryMap);
+		return "QueryParamMap";
+	}
+ URI --uniform resource indicator
+ URL - uniform resource locator
+
+
+
+

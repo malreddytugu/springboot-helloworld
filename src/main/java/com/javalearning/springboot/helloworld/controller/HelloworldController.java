@@ -90,7 +90,7 @@ public class HelloworldController {
 	
 	
 	@GetMapping("/hello")
-	public Employee hello(@RequestParam(required = false) String msg) {
+	public Employee hello(@RequestParam(required = true) String msg, @RequestParam(defaultValue = "0") int age) {
 		//System.out.println("hello method is called...");
 		logger.debug("***************"+msg);
 		logger.trace("TRACE");
