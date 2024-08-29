@@ -10,4 +10,5 @@ import com.javalearning.springboot.helloworld.model.Employee;
 public interface EmployeeService {
 
 	List<Employee> getAll();
+	Employee getEmployeeById(long id);
 }
