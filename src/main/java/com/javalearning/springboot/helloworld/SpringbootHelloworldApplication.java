@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = "{com.javalearning.springboot.helloworld.service}")
+//@ComponentScan(basePackages = "{com.javalearning.springboot}")
 public class SpringbootHelloworldApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
@@ -19,9 +19,8 @@ public class SpringbootHelloworldApplication extends SpringBootServletInitialize
 		// for(int i=0;i<5;i++) { // initialization condition, increment or decrement
 			// System.out.println(i);  // 1 2 3 4 5
 		 //}
-		 
 		 for(String beanName  : beanNames) {
-			// System.out.println(beanName);
+			//System.out.println(beanName);
 		 }
 	}
 
