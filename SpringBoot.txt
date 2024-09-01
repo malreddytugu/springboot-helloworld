@@ -39,9 +39,7 @@ encryption
 abc-->xyz
 abc-->h13-->encrption SHA256
 
-
 ipaddress:port//context/hello
-
 127.0.0.0:8181/hello
 
 80-->http
@@ -217,10 +215,8 @@ public class Employee{
 	//getters and setters
 }
 
-
 IOC---Inversion of Control
 DI--Dependency Injection
-
 
 Spring Boot Main annotations
 --------------------------------------------------
@@ -343,7 +339,6 @@ class UserConfig {}
 The @Bean annotation indicates that a method produces a bean to be managed by the Spring container. 
 
 The @Bean annotation is usually declared in the Configuration class to create Spring Bean definitions.
-
 
 @RestController = @ResponseBody+@Controller
 @Controller=@Service=@Repository=@Component
@@ -688,6 +683,8 @@ SpringApplication.setAdditionalProfiles("test");
         <configuration> 
            <profiles> 
              <profile>test</profile>
+			 <profile>qa</profile>
+			 <profile>prod</profile>
            </profiles>
         </configuration> 
   </plugin> 
@@ -845,6 +842,14 @@ public String getUsers(@PathVariable Map<String, String> locationMap, @RequestPa
  URI --uniform resource indicator
  URL - uniform resource locator
 
+20.@RequestMapping
+21.@GetMapping
+22.@PostMapping
+23.@PutMapping
+24.@DeleteMapping
+25.@RequestBody 
+26.@PathVariable
+27.@RequestParam
 
-
+/api/v1/employee/save
 
