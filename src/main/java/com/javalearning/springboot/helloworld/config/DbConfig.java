@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile(value= {"dev","!dev"})
+//@Profile(value= {"dev","!dev"})
 public class DbConfig {
 
 	@Value("${db.driverClass}")
