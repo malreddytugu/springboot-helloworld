@@ -2,6 +2,7 @@ package com.javalearning.springboot.helloworld.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javalearning.springboot.helloworld.EmployeeNotFoundException;
 import com.javalearning.springboot.helloworld.model.Employee;
 import com.javalearning.springboot.helloworld.model.EmployeeDto;
 import com.javalearning.springboot.helloworld.service.EmployeeService;
@@ -40,9 +42,16 @@ public class EmployeeController {
 
 	@GetMapping("/employee/{id}")
 	// @ResponseBody
-	public Employee getEmployeeById(@PathVariable long id) {
+	public Employee getEmployeeById(@PathVariable long id) throws EmployeeNotFoundException {
 		System.out.println("patath param id value is : " + id);
-		return employeeService.getEmployeeById(id);
+		
+		Optional<Employee> emp = employeeService.getEmployeeById(id);
+		if(emp.isPresent()) {
+			return emp.get();
+		}else {
+			throw new EmployeeNotFoundException("Employee not found with id "+id);
+		}
+		 
 	}
 
 	@GetMapping("/employee/{id}/name/{name}")
@@ -72,7 +81,7 @@ public class EmployeeController {
 	@PutMapping("/v1/employee/update")
 	public EmployeeDto updateEmployee(@RequestBody EmployeeDto empDto) {
 		System.out.println("empDto : "+empDto);
-		Employee emp = employeeService.getEmployeeById(empDto.getEmpId());
+		Employee emp = employeeService.getEmployeeById(empDto.getEmpId()).get();
 		empDto = new EmployeeDto(empDto.getEmpId(), empDto.getName(),empDto.getEmailId(),empDto.getDeptName(),empDto.getLocation());
 		
 		return empDto;

@@ -2,6 +2,7 @@ package com.javalearning.springboot.helloworld.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.javalearning.springboot.helloworld.model.Employee;
 import com.javalearning.springboot.helloworld.service.EmployeeService;
@@ -28,9 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public Employee getEmployeeById(long id) {
+	public Optional<Employee> getEmployeeById(long id) {
 		List<Employee> empList = getAll(); 
-		Employee emp = empList.stream().filter(e->e.getEmpId()==id).findFirst().get();
+		Optional<Employee> emp = empList.stream().filter(e->e.getEmpId()==id).findFirst();
 		return emp;
 	}
 	
