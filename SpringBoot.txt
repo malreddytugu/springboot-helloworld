@@ -39,9 +39,7 @@ encryption
 abc-->xyz
 abc-->h13-->encrption SHA256
 
-
 ipaddress:port//context/hello
-
 127.0.0.0:8181/hello
 
 80-->http
@@ -217,10 +215,8 @@ public class Employee{
 	//getters and setters
 }
 
-
 IOC---Inversion of Control
 DI--Dependency Injection
-
 
 Spring Boot Main annotations
 --------------------------------------------------
@@ -343,7 +339,6 @@ class UserConfig {}
 The @Bean annotation indicates that a method produces a bean to be managed by the Spring container. 
 
 The @Bean annotation is usually declared in the Configuration class to create Spring Bean definitions.
-
 
 @RestController = @ResponseBody+@Controller
 @Controller=@Service=@Repository=@Component
@@ -688,6 +683,8 @@ SpringApplication.setAdditionalProfiles("test");
         <configuration> 
            <profiles> 
              <profile>test</profile>
+			 <profile>qa</profile>
+			 <profile>prod</profile>
            </profiles>
         </configuration> 
   </plugin> 
@@ -842,8 +839,69 @@ public String getUsers(@PathVariable Map<String, String> locationMap, @RequestPa
 		System.out.println(queryMap);
 		return "QueryParamMap";
 	}
+	
+
+public class AppError{
+String errorCode;
+String message;
+String httpStatus;
+
+}
+
+@RestControllerAdvice
+public class EmployeeExceptionHandler{
+	
+	@ExceptionHandler(EmployeeNotFoundException.class)
+	public ResponseEntity<AppError> handleException(StudentNotFoundException exception){
+		AppError error = new AppError(UUID.randomUUID().toString, 
+		exception.getMessage,
+		HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+}
+
  URI --uniform resource indicator
  URL - uniform resource locator
+
+20.@RequestMapping
+21.@GetMapping
+22.@PostMapping
+23.@PutMapping
+24.@DeleteMapping
+25.@RequestBody 
+26.@PathVariable
+27.@RequestParam
+28.@RestControllerAdvice & @ExceptionHandler
+
+
+
+1. Create a custom Exception for EmployeeNotFoundException
+2. create EmployeeExceptionHandler
+	and handle the exception with help of ExceptionHandler annotation.
+
+@RestControllerAdvice
+public class EmployeeExceptionHandler{
+	
+	@ExceptionHandler(EmployeeNotFoundException.class)
+	public ResponseEntity<AppError> handleException(StudentNotFoundException exception){
+		AppError error = new AppError(UUID.randomUUID().toString, 
+		exception.getMessage,
+		HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+}
+
+Spring Data JPA related annotations:
+------------------------------------------------------------
+29.@Entity
+30.@Table
+31.@Column
+32.@Transactional 
+33.Entity class relationships 
+34.@OnetoOne 
+35.@OnetoMany 
+36.@ManytoOne
+37.@ManytoMany
 
 
 
