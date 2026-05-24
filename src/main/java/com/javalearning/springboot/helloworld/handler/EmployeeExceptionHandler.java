@@ -15,8 +15,8 @@ public class EmployeeExceptionHandler {
 
 	@ExceptionHandler(EmployeeNotFoundException.class)
 	public ResponseEntity<AppError> handleException(EmployeeNotFoundException exception){
-		AppError error = new AppError(UUID.randomUUID().toString(), exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		AppError error = new AppError(UUID.randomUUID().toString(), exception.getMessage(), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 
 }

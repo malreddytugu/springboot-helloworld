@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Profile;
 //@Profile(value= {"dev","!dev"})
 public class DbConfig {
 
-	@Value("${db.driverClass}")
+	@Value("${db.driverClass:com.oracle.driver.OracleDriver}")
 	private String driverClass;
 	
-	@Value("${db.url}")
+	@Value("${db.url:jdbc:oracle:thin:@localhost:1521:XE}")
 	private String url;
 	
-	@Value("${db.username}")
+	@Value("${db.username:admin}")
 	private String username;
 	
-	@Value("${db.password}")
+	@Value("${db.password:admin}")
 	private String password;
 
 	@Override

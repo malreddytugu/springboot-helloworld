@@ -2,7 +2,6 @@ package com.javalearning.springboot.helloworld.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 import com.javalearning.springboot.helloworld.service.EmployeeService;
 import com.javalearning.springboot.helloworld.service.impl.EmployeeServiceImpl;
@@ -22,13 +21,6 @@ public class AppConfig {
 	public Student student() {
 		return new Student(address());
 	}
-	
-	@Bean
-	@Profile(value = {"dev","!dev"})
-	public DbConfig dbConfig() {
-		return new DbConfig();
-	}
-	
 	
 	@Bean
 	public EmployeeService employeeService() {
