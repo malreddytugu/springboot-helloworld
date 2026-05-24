@@ -8,23 +8,21 @@ import com.javalearning.springboot.helloworld.model.Employee;
 import com.javalearning.springboot.helloworld.service.EmployeeService;
 
 public class EmployeeServiceImpl implements EmployeeService{
-	List<Employee> empList = null;
+	List<Employee> empList;
+
 	public EmployeeServiceImpl() {
 		System.out.println("***************EmployeeServiceImpl object created*************");
 		empList = new ArrayList<Employee>();
-
+		empList.add(new Employee(101l, "Malreddy", "malreddy.tugu@gmail.com", "IT", "Bangalore"));
+		empList.add(new Employee(102l, "Vasu", "vasu@gmail.com", "ADMIN", "USA"));
+		empList.add(new Employee(103l, "Anusha", "anu@gmail.com", "Java Developer", "Hydearabad"));
+		empList.add(new Employee(104l, "Hari", "hari@gmail.com", "Fullstack Java Developer", "Chennai"));
+		empList.add(new Employee(105l, "Naseera", "snaseera@gmail.com", "Home Maker", "USA"));
+		empList.add(new Employee(106l, "Keerthi", "keerthikumar@gmail.com", "Java Trainer", "India"));
 	}
 
 	@Override
 	public List<Employee> getAll() {
-			//List<Employee> empList = new ArrayList<Employee>();
-			empList.add(new Employee(101l, "Malreddy", "malreddy.tugu@gmail.com", "IT", "Bangalore"));
-			empList.add(new Employee(102l, "Vasu", "vasu@gmail.com", "ADMIN", "USA"));
-			empList.add(new Employee(103l, "Anusha", "anu@gmail.com", "Java Developer", "Hydearabad"));
-			empList.add(new Employee(104l, "Hari", "hari@gmail.com", "Fullstack Java Developer", "Chennai"));
-			empList.add(new Employee(105l, "Naseera", "snaseera@gmail.com", "Home Maker", "USA"));
-			empList.add(new Employee(106l, "Keerthi", "keerthikumar@gmail.com", "Java Trainer", "India"));
-			System.out.println(empList.size());
 		return empList;
 	}
 
