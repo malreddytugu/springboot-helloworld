@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,70 +28,69 @@ import com.javalearning.springboot.helloworld.service.EmployeeService;
 @RequestMapping("/api")
 public class EmployeeController {
 
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
 	@Autowired
 	EmployeeService employeeService;
 
-	// /api/v1/employee
 	@GetMapping("v1/employee")
 	public List<Employee> getAll() {
 		return employeeService.getAll();
 	}
-	
+
 	@GetMapping("v2/employee")
 	public List<Employee> getAllV2() {
 		return employeeService.getAll();
 	}
 
 	@GetMapping("/employee/{id}")
-	// @ResponseBody
 	public Employee getEmployeeById(@PathVariable long id) throws EmployeeNotFoundException {
-		System.out.println("patath param id value is : " + id);
-		
+		logger.info("path param id value is : {}", id);
+
 		Optional<Employee> emp = employeeService.getEmployeeById(id);
-		if(emp.isPresent()) {
+		if (emp.isPresent()) {
 			return emp.get();
-		}else {
-			throw new EmployeeNotFoundException("Employee not found with id "+id);
+		} else {
+			throw new EmployeeNotFoundException("Employee not found with id " + id);
 		}
-		 
 	}
 
 	@GetMapping("/employee/{id}/name/{name}")
-	public String getEmployee( @PathVariable Map<String, String> empMap) {
-		System.out.println(empMap);
+	public String getEmployee(@PathVariable Map<String, String> empMap) {
+		logger.info(empMap.toString());
 		return "PathParamMap";
 	}
-	
+
 	@GetMapping("/employee/id/name/")
 	public String getEmployeeQueryMap(@RequestParam Map<String, String> queryMap) {
-		System.out.println(queryMap);
+		logger.info(queryMap.toString());
 		return "QueryParamMap";
 	}
-	
-	@RequestMapping(value = "/v1/hello", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/v1/hello", method = RequestMethod.GET)
 	@ResponseBody
 	public Employee hello() {
-		return new Employee(101l, "Malreddy","mal@gmail.com", "IT","Bangalore");
+		return new Employee(101l, "Malreddy", "mal@gmail.com", "IT", "Bangalore");
 	}
-	
+
 	@PostMapping("/v1/employee/save")
 	public Employee saveEmp(@RequestBody Employee employee) {
-		System.out.println(employee);
+		logger.info(employee.toString());
 		return employee;
 	}
-	
+
 	@PutMapping("/v1/employee/update")
 	public EmployeeDto updateEmployee(@RequestBody EmployeeDto empDto) {
-		System.out.println("empDto : "+empDto);
+		logger.info("empDto : {}", empDto);
 		Employee emp = employeeService.getEmployeeById(empDto.getEmpId()).get();
-		empDto = new EmployeeDto(empDto.getEmpId(), empDto.getName(),empDto.getEmailId(),empDto.getDeptName(),empDto.getLocation());
-		
+		empDto = new EmployeeDto(empDto.getEmpId(), empDto.getName(), empDto.getEmailId(), empDto.getDeptName(), empDto.getLocation());
+
 		return empDto;
 	}
-	
+
 	@DeleteMapping("/employee/{id}")
 	public void deleteEmployeeById(@PathVariable long id) {
-		System.out.println("patath param id value is : " + id);
+		logger.info("path param id value is : {}", id);
 		employeeService.deleteEmployeeById(id);
 	}
 }
